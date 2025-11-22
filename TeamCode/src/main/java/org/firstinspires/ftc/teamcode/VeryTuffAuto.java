@@ -8,23 +8,15 @@ import org.firstinspires.ftc.teamcode.AutonomousMovement.Movement;
 
 @Autonomous(name = "VeryTuffAuto", group = "Autonomous")
 public class VeryTuffAuto extends LinearOpMode {
-	//lightweight maxxing
-	private AutonomousMovement autonomousMovement;
-	private Movement movement;
-	private DcMotor fl0;
-	private DcMotor fr1;
-	private DcMotor bl2;
-	private DcMotor br3;
-
 	@Override
 	public void runOpMode() {
-		fl0 = hardwareMap.get(DcMotor.class, "fl0");
-		fr1 = hardwareMap.get(DcMotor.class, "fr1");
-		bl2 = hardwareMap.get(DcMotor.class, "bl2");
-		br3 = hardwareMap.get(DcMotor.class, "br3");
+		DcMotor fl0 = hardwareMap.get(DcMotor.class, "fl0");
+		DcMotor fr1 = hardwareMap.get(DcMotor.class, "fr1");
+		DcMotor bl2 = hardwareMap.get(DcMotor.class, "bl2");
+		DcMotor br3 = hardwareMap.get(DcMotor.class, "br3");
 		
-		autonomousMovement = new AutonomousMovement(hardwareMap, telemetry);
-		movement = autonomousMovement.movement();
+		AutonomousMovement autonomousMovement = new AutonomousMovement(hardwareMap, telemetry);
+		Movement movement = autonomousMovement.movement();
 		
 		waitForStart();
 		

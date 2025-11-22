@@ -65,6 +65,11 @@ public class AutonomousMovement {
 		}
 	}
 	
+	public void runtimeRemaining(long timeMs) {
+		telemetry.addData("Runtime remaining: ", (timeMs - runtime.milliseconds()));
+		telemetry.update();
+	}
+	
 	public class Movement {
 		public void drive(double speed, long timeMs) {
 			fl0.setPower(speed);
@@ -72,7 +77,7 @@ public class AutonomousMovement {
 			bl2.setPower(speed);
 			br3.setPower(speed);
 			runtime.reset();
-			while (runtime.milliseconds() < timeMs) {}
+			while (runtime.milliseconds() < timeMs) {runtimeRemaining(timeMs);}
 			stop();
 		}
 		
@@ -82,7 +87,7 @@ public class AutonomousMovement {
 			bl2.setPower(-speed);
 			br3.setPower(speed);
 			runtime.reset();
-			while (runtime.milliseconds() < timeMs) {}
+			while (runtime.milliseconds() < timeMs) {runtimeRemaining(timeMs);}
 			stop();
 		}
 		
@@ -92,7 +97,7 @@ public class AutonomousMovement {
 			bl2.setPower(speed);
 			br3.setPower(-speed);
 			runtime.reset();
-			while (runtime.milliseconds() < timeMs) {}
+			while (runtime.milliseconds() < timeMs) {runtimeRemaining(timeMs);}
 			stop();
 		}
 		
@@ -110,7 +115,7 @@ public class AutonomousMovement {
 		public void shooter(double speed, long timeMs) {
 			shootmotor.setPower(speed);
 			runtime.reset();
-			while (runtime.milliseconds() < timeMs) {}
+			while (runtime.milliseconds() < timeMs) {runtimeRemaining(timeMs);}
 			shootmotor.setPower(0);
 		}
 		
