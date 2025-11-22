@@ -20,6 +20,6 @@ public class VeryTuffAuto extends LinearOpMode {
 		
 		waitForStart();
 		
-		movement.drive(0.5, 1500);
+		movement.drive(0.5, 1125);
 	}
 }
