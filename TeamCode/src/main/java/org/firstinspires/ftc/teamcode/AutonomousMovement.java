@@ -14,7 +14,6 @@ import java.util.Collections;
 import java.util.List;
 
 public class AutonomousMovement {
-	private final HardwareMap hardwareMap;
 	private final Telemetry telemetry;
 	private final Limelight3A limelight;
 	private final DcMotor fl0;
@@ -29,7 +28,6 @@ public class AutonomousMovement {
 	private boolean isLimelightStarted;
 	
 	public AutonomousMovement(HardwareMap hardwareMap, Telemetry telemetry) {
-		this.hardwareMap = hardwareMap;
 		this.telemetry = telemetry;
 		this.limelight = hardwareMap.get(Limelight3A.class, "ll3a");
 		this.fl0 = hardwareMap.get(DcMotor.class, "fl0");
