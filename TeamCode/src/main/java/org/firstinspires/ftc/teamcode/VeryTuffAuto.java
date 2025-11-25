@@ -3,7 +3,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-import org.firstinspires.ftc.teamcode.AutonomousMovement.Movement;
+import org.firstinspires.ftc.teamcode.helpers.MovementHelper;
 
 @Autonomous(name = "VeryTuffAuto", group = "Autonomous")
 public class VeryTuffAuto extends LinearOpMode {
@@ -11,7 +11,7 @@ public class VeryTuffAuto extends LinearOpMode {
 	@Override
 	public void runOpMode() {
 		AutonomousMovement autonomousMovement = new AutonomousMovement(hardwareMap, telemetry);
-		Movement movement = autonomousMovement.movement();
+		MovementHelper movement = autonomousMovement.movement();
 		
 		waitForStart();
 		
