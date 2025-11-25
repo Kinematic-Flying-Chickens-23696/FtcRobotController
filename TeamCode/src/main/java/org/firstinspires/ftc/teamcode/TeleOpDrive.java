@@ -50,6 +50,7 @@ public class TeleOpDrive extends OpMode {
 		movement.rotation();
 		shooter.motor();
 		shooter.servo();
+		module.logPowerToTelemetry();
 		
 	}
 	
@@ -107,6 +108,13 @@ public class TeleOpDrive extends OpMode {
 					servo0.setPosition(.4);
 				}
 			}
+		}
+		
+		public void logPowerToTelemetry() {
+			telemetry.addData("FL Power", fl0.getPower());
+			telemetry.addData("FR Power", fr1.getPower());
+			telemetry.addData("BL Power", bl2.getPower());
+			telemetry.addData("BR Power", br3.getPower());
 		}
 	}
 }
