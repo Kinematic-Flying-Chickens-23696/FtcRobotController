@@ -16,6 +16,10 @@ public class TeleOpDrive extends OpMode {
 	public DcMotor shootmotor;
 	public Servo servo0;
 	
+	Movement movement = new Movement();
+	Module module = new Module();
+	Module.Shooter shooter = module.new Shooter();
+	
 	@Override
 	public void init() {
 		
@@ -41,10 +45,6 @@ public class TeleOpDrive extends OpMode {
 	@Override
 	public void loop() {
 		
-		Movement movement = new Movement();
-		Module module = new Module();
-		Module.Shooter shooter = module.new Shooter();
-		
 		movement.drive();
 		movement.slide();
 		movement.rotation();
@@ -57,10 +57,10 @@ public class TeleOpDrive extends OpMode {
 		
 		public void drive() {
 			
-			fl0.setPower(gamepad1.right_trigger-gamepad1.left_trigger);
-			fr1.setPower(gamepad1.right_trigger-gamepad1.left_trigger);
-			bl2.setPower(gamepad1.right_trigger-gamepad1.left_trigger);
-			br3.setPower(gamepad1.right_trigger-gamepad1.left_trigger);
+			fl0.setPower(gamepad1.right_trigger - gamepad1.left_trigger);
+			fr1.setPower(gamepad1.right_trigger - gamepad1.left_trigger);
+			bl2.setPower(gamepad1.right_trigger - gamepad1.left_trigger);
+			br3.setPower(gamepad1.right_trigger - gamepad1.left_trigger);
 			
 		}
 		

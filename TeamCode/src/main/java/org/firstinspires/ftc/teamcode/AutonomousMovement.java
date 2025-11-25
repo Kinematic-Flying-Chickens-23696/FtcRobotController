@@ -69,14 +69,16 @@ public class AutonomousMovement {
 	}
 	
 	public class Movement {
-  // "and when im rock hard i ******* rock hard" -ken ashcorp
+		// "and when im rock hard i ******* rock hard" -ken ashcorp
 		public void drive(double speed, long timeMs) {
 			fl0.setPower(speed);
 			fr1.setPower(speed);
 			bl2.setPower(speed);
 			br3.setPower(speed);
 			runtime.reset();
-			while (runtime.milliseconds() < timeMs) {runtimeRemaining(timeMs);}
+			while (runtime.milliseconds() < timeMs) {
+				runtimeRemaining(timeMs);
+			}
 			stop();
 		}
 		
@@ -86,7 +88,9 @@ public class AutonomousMovement {
 			bl2.setPower(-speed);
 			br3.setPower(speed);
 			runtime.reset();
-			while (runtime.milliseconds() < timeMs) {runtimeRemaining(timeMs);}
+			while (runtime.milliseconds() < timeMs) {
+				runtimeRemaining(timeMs);
+			}
 			stop();
 		}
 		
@@ -96,7 +100,9 @@ public class AutonomousMovement {
 			bl2.setPower(speed);
 			br3.setPower(-speed);
 			runtime.reset();
-			while (runtime.milliseconds() < timeMs) {runtimeRemaining(timeMs);}
+			while (runtime.milliseconds() < timeMs) {
+				runtimeRemaining(timeMs);
+			}
 			stop();
 		}
 		
@@ -109,13 +115,15 @@ public class AutonomousMovement {
 	}
 	
 	public class Module {
-  // "tickle my fancy tickle my prostate" -ken ashcorp
+		// "tickle my fancy tickle my prostate" -ken ashcorp
 		private final Limelight limelightHelper = new Limelight();
 		
 		public void shooter(double speed, long timeMs) {
 			shootmotor.setPower(speed);
 			runtime.reset();
-			while (runtime.milliseconds() < timeMs) {runtimeRemaining(timeMs);}
+			while (runtime.milliseconds() < timeMs) {
+				runtimeRemaining(timeMs);
+			}
 			shootmotor.setPower(0);
 		}
 		
@@ -142,11 +150,9 @@ public class AutonomousMovement {
 					for (Integer tag : detectedTags) {
 						if (tag == 21) {
 							return "GREEN PURPLE PURPLE";
-						}
-						else if (tag == 22) {
+						} else if (tag == 22) {
 							return "PURPLE GREEN PURPLE";
-						}
-						else if (tag == 23) {
+						} else if (tag == 23) {
 							return "PURPLE PURPLE GREEN";
 						}
 					}
