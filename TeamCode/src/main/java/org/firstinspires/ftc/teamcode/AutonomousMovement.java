@@ -69,6 +69,7 @@ public class AutonomousMovement {
 	}
 	
 	public class Movement {
+  // "and when im rock hard i ******* rock hard" -ken ashcorp
 		public void drive(double speed, long timeMs) {
 			fl0.setPower(speed);
 			fr1.setPower(speed);
@@ -108,6 +109,7 @@ public class AutonomousMovement {
 	}
 	
 	public class Module {
+  // "tickle my fancy tickle my prostate" -ken ashcorp
 		private final Limelight limelightHelper = new Limelight();
 		
 		public void shooter(double speed, long timeMs) {
