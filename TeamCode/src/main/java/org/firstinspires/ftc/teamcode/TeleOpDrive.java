@@ -6,7 +6,6 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
 @TeleOp(name = "TeleOpDrive")
-
 public class TeleOpDrive extends OpMode {
 	
 	public DcMotor fl0;
@@ -24,8 +23,8 @@ public class TeleOpDrive extends OpMode {
 	public void init() {
 		
 		// fl0 must be negative for forward
-		// fr1 must be negative for forward
-		// bl2 must be positive for forward
+		// fr1 must be positive for forward
+		// bl2 must be negative for forward
 		// br3 must be positive for forward
 		fl0 = hardwareMap.get(DcMotor.class, "fl0");
 		fr1 = hardwareMap.get(DcMotor.class, "fr1");
@@ -54,8 +53,14 @@ public class TeleOpDrive extends OpMode {
 		
 	}
 	
+	/**
+	 * Movement class handles any gamepad input from gamepad1 relating to robot movement and supplies power to drive motors accordingly.
+	 */
 	private class Movement {
 		
+		/**
+		 * Reads gamepad1.right_trigger and subtracts `gamepad1.left_trigger` to safely supply power to drive motors for Y-axis movement.
+		 */
 		public void drive() {
 			
 			fl0.setPower(gamepad1.right_trigger - gamepad1.left_trigger);
@@ -65,6 +70,9 @@ public class TeleOpDrive extends OpMode {
 			
 		}
 		
+		/**
+		 * Reads gamepad1.right_stick_x to safely supply power to drive motors for X-axis movement.
+		 */
 		public void slide() {
 			
 			fl0.setPower(gamepad1.right_stick_x);
@@ -74,6 +82,9 @@ public class TeleOpDrive extends OpMode {
 			
 		}
 		
+		/**
+		 * Reads gamepad1.left_stick_x to safely supply power to drive motors for rotation movement.
+		 */
 		public void rotation() {
 			
 			fl0.setPower(gamepad1.left_stick_x);
@@ -84,8 +95,22 @@ public class TeleOpDrive extends OpMode {
 		}
 	}
 	
+	/**
+	 * Module class handles any gamepad2 input to control any module (except movement functions) on the robot.
+	 */
 	private class Module {
+		/**
+		 * Shooter class consists of methods to control the shooter motor and servo based on gamepad2 input.
+		 */
 		public class Shooter {
+			/**
+			 * Sets shooter motor power based on gamepad2 button inputs.
+			 * A = 0.3 power
+			 * B = 0.5 power
+			 * Y = 0.7 power
+			 * X = 0.9 power
+			 * No button = 0 power
+			 */
 			public void motor() {
 				if (gamepad2.a) {
 					shootmotor.setPower(.3);
@@ -100,6 +125,11 @@ public class TeleOpDrive extends OpMode {
 				}
 			}
 			
+			/**
+			 * Sets servo0 position based on gamepad2 bumper inputs.
+			 * Right bumper = 0.75
+			 * Left bumper = 0.4
+			 */
 			public void servo() {
 				if (gamepad2.right_bumper) {
 					servo0.setPosition(.75);
@@ -110,11 +140,16 @@ public class TeleOpDrive extends OpMode {
 			}
 		}
 		
+		/**
+		 * Logs the current power of each drive motor and position of all servos for debugging purposes.
+		 */
 		public void logPowerToTelemetry() {
-			telemetry.addData("FL Power", fl0.getPower());
-			telemetry.addData("FR Power", fr1.getPower());
-			telemetry.addData("BL Power", bl2.getPower());
-			telemetry.addData("BR Power", br3.getPower());
+			telemetry.addData("fl0 Power", fl0.getPower());
+			telemetry.addData("fr1 Power", fr1.getPower());
+			telemetry.addData("bl2 Power", bl2.getPower());
+			telemetry.addData("br3 Power", br3.getPower());
+			telemetry.addData("shootmotor Power", shootmotor.getPower());
+			telemetry.addData("servo0 Position", servo0.getPosition());
 		}
 	}
 }
