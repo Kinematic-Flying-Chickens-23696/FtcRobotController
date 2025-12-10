@@ -24,6 +24,7 @@ public class AutonomousMovement {
 	private final DcMotor bl2;
 	private final DcMotor br3;
 	private final DcMotor shootmotor;
+	private final DcMotor cyclermotor;
 	private final ElapsedTime runtime = new ElapsedTime();
 	private final Movement movementHelper = new Movement();
 	private final Module moduleHelper = new Module();
@@ -39,6 +40,7 @@ public class AutonomousMovement {
 		this.bl2 = hardwareMap.get(DcMotor.class, "bl2");
 		this.br3 = hardwareMap.get(DcMotor.class, "br3");
 		this.shootmotor = hardwareMap.get(DcMotor.class, "shootmotor");
+		this.cyclermotor = hardwareMap.get(DcMotor.class, "cyclermotor");
 	}
 	
 	public Movement movement() {
@@ -121,6 +123,7 @@ public class AutonomousMovement {
 	public class Module {
 		// "tickle my fancy tickle my prostate" -ken ashcorp
 		private final Limelight limelightHelper = new Limelight();
+		private final Colorsense colorsenseHelper = new Colorsense();
 		
 		public void shooter(double speed, long timeMs) {
 			shootmotor.setPower(speed);
@@ -129,6 +132,15 @@ public class AutonomousMovement {
 				runtimeRemaining(timeMs);
 			}
 			shootmotor.setPower(0);
+		}
+		
+		public void cycle() {
+			cyclermotor.setPower(0.5);
+			runtime.reset();
+			while (runtime.milliseconds() < 1500) {
+				runtimeRemaining((long) (runtime.milliseconds() - 1500));
+			}
+			cyclermotor.setPower(0);
 		}
 		
 		public class Colorsense {
@@ -168,6 +180,10 @@ public class AutonomousMovement {
 			
 		}
 		
+		public Colorsense colorsense() {
+			return colorsenseHelper;
+		}
+		
 		public Limelight limelight() {
 			return limelightHelper;
 		}
@@ -190,6 +206,7 @@ public class AutonomousMovement {
 				List<Integer> sequence = Collections.emptyList();
 				if (result != null && result.isValid()) {
 					for (Integer tag : detectedTags) {
+						// 1 means green, 0 means purple
 						if (tag == 21) {
 							sequence.add(1);
 							sequence.add(0);
