@@ -18,11 +18,12 @@ public class LimelightAuto extends LinearOpMode {
 		Limelight3A limelight = autonomousMovement.limelightDevice();
 		limelight.pipelineSwitch(0);
 		autonomousMovement.startLimelight();
+		List<Integer> sequence;
 		
 		waitForStart();
 		
 		if (opModeIsActive()) {
-			List<Integer> sequence = limelightHelper.getMonolithOrientation(limelightHelper.getResults());
+			sequence = limelightHelper.getMonolithOrientation(limelightHelper.getResults());
 			if (sequence == List.of(1, 0, 0)) {
 				// gpp sequence
 				movement.drive(1, 400);
