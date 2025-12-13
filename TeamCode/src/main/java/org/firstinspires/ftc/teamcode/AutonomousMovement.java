@@ -4,6 +4,7 @@ import com.qualcomm.hardware.limelightvision.LLResult;
 import com.qualcomm.hardware.limelightvision.LLResultTypes;
 import com.qualcomm.hardware.limelightvision.Limelight3A;
 import com.qualcomm.hardware.rev.RevColorSensorV3;
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.NormalizedRGBA;
@@ -24,7 +25,7 @@ public class AutonomousMovement {
 	private final DcMotor bl2;
 	private final DcMotor br3;
 	private final DcMotor shootmotor;
-	private final DcMotor cyclermotor;
+	private final CRServo cyclerservo;
 	private final ElapsedTime runtime = new ElapsedTime();
 	private final Movement movementHelper = new Movement();
 	private final Module moduleHelper = new Module();
@@ -40,7 +41,7 @@ public class AutonomousMovement {
 		this.bl2 = hardwareMap.get(DcMotor.class, "bl2");
 		this.br3 = hardwareMap.get(DcMotor.class, "br3");
 		this.shootmotor = hardwareMap.get(DcMotor.class, "shootmotor");
-		this.cyclermotor = hardwareMap.get(DcMotor.class, "cyclermotor");
+		this.cyclerservo = hardwareMap.get(CRServo.class, "cyclerservo");
 	}
 	
 	public Movement movement() {
@@ -135,12 +136,12 @@ public class AutonomousMovement {
 		}
 		
 		public void cycle() {
-			cyclermotor.setPower(0.5);
+			cyclerservo.setPower(1);
 			runtime.reset();
 			while (runtime.milliseconds() < 1500) {
 				runtimeRemaining((long) (runtime.milliseconds() - 1500));
 			}
-			cyclermotor.setPower(0);
+			cyclerservo.setPower(0);
 		}
 		
 		public class Colorsense {
