@@ -101,7 +101,7 @@ public class AutonomousMovement {
 			stop();
 		}
 		
-		public void rotation(double speed, long timeMs) {
+		public void rotate(double speed, long timeMs) {
 			fl0.setPower(speed);
 			fr1.setPower(-speed);
 			bl2.setPower(speed);
@@ -119,6 +119,10 @@ public class AutonomousMovement {
 			bl2.setPower(0);
 			br3.setPower(0);
 		}
+		
+		public void SyBaU() {
+			throw new IllegalAccessError();
+		}
 	}
 	
 	public class Module {
@@ -126,7 +130,7 @@ public class AutonomousMovement {
 		private final Limelight limelightHelper = new Limelight();
 		private final Colorsense colorsenseHelper = new Colorsense();
 		
-		public void shooter(double speed, long timeMs) {
+		public void shoot(double speed, long timeMs) {
 			shootmotor.setPower(speed);
 			runtime.reset();
 			while (runtime.milliseconds() < timeMs) {
@@ -135,7 +139,7 @@ public class AutonomousMovement {
 			shootmotor.setPower(0);
 		}
 		
-		public void cycle() {
+		public void changeBall() {
 			cyclerservo.setPower(1);
 			runtime.reset();
 			while (runtime.milliseconds() < 1500) {
@@ -146,7 +150,7 @@ public class AutonomousMovement {
 		
 		public class Colorsense {
 			
-			public DetectedColor detectColor(NormalizedRGBA color) {
+			public DetectedColor categorizeColor(NormalizedRGBA color) {
 				float red = color.red;
 				float green = color.green;
 				float blue = color.blue;
@@ -202,7 +206,7 @@ public class AutonomousMovement {
 				return Collections.unmodifiableList(new ArrayList<>(fiducialIds));
 			}
 			
-			public List<Integer> getMonolithOrientation(List<Integer> detectedTags) {
+			public List<Integer> getMonolithSequence(List<Integer> detectedTags) {
 				LLResult result = limelight.getLatestResult();
 				List<Integer> sequence = Collections.emptyList();
 				if (result != null && result.isValid()) {

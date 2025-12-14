@@ -23,7 +23,7 @@ public class LimelightAuto extends LinearOpMode {
 		waitForStart();
 		
 		if (opModeIsActive()) {
-			sequence = limelightHelper.getMonolithOrientation(limelightHelper.getResults());
+			sequence = limelightHelper.getMonolithSequence(limelightHelper.getResults());
 			if (sequence == List.of(1, 0, 0)) {
 				// gpp sequence
 				movement.drive(1, 400);
@@ -41,48 +41,48 @@ public class LimelightAuto extends LinearOpMode {
 				telemetry.addData("Step", step);
 				telemetry.update();
 				if (step == 0) {
-					AutonomousMovement.DetectedColor detectedColor = colorsense.detectColor(colorsense.getColor());
+					AutonomousMovement.DetectedColor detectedColor = colorsense.categorizeColor(colorsense.getColor());
 					if (detectedColor == AutonomousMovement.DetectedColor.PURPLE) {
-						module.shooter(1, 3000);
+						module.shoot(1, 3000);
 					} else {
-						module.cycle();
-						AutonomousMovement.DetectedColor colorRecheck = colorsense.detectColor(colorsense.getColor());
+						module.changeBall();
+						AutonomousMovement.DetectedColor colorRecheck = colorsense.categorizeColor(colorsense.getColor());
 						if (colorRecheck == AutonomousMovement.DetectedColor.PURPLE) {
-							module.shooter(1, 3000);
+							module.shoot(1, 3000);
 						} else {
-							module.cycle();
-							AutonomousMovement.DetectedColor finalRecheck = colorsense.detectColor(colorsense.getColor());
+							module.changeBall();
+							AutonomousMovement.DetectedColor finalRecheck = colorsense.categorizeColor(colorsense.getColor());
 							if (finalRecheck == AutonomousMovement.DetectedColor.PURPLE) {
-								module.shooter(1, 3000);
+								module.shoot(1, 3000);
 							} else {
 								telemetry.addData("Step:", step);
 								telemetry.addData("Looking for color:", "AutonomousMovement.DetectedColor.PURPLE");
 								telemetry.addData("Detected color:", detectedColor);
 								telemetry.addLine("!!ERROR!! No matching color found! Please recalibrate the color sensor! Proceeding to fire next available ball.");
-								module.shooter(1, 3000);
+								module.shoot(1, 3000);
 							}
 						}
 					}
 				} else if (step == 1) {
-					AutonomousMovement.DetectedColor detectedColor = colorsense.detectColor(colorsense.getColor());
+					AutonomousMovement.DetectedColor detectedColor = colorsense.categorizeColor(colorsense.getColor());
 					if (detectedColor == AutonomousMovement.DetectedColor.GREEN) {
-						module.shooter(1, 3000);
+						module.shoot(1, 3000);
 					} else {
-						module.cycle();
-						AutonomousMovement.DetectedColor colorRecheck = colorsense.detectColor(colorsense.getColor());
+						module.changeBall();
+						AutonomousMovement.DetectedColor colorRecheck = colorsense.categorizeColor(colorsense.getColor());
 						if (colorRecheck == AutonomousMovement.DetectedColor.GREEN) {
-							module.shooter(1, 3000);
+							module.shoot(1, 3000);
 						} else {
-							module.cycle();
-							AutonomousMovement.DetectedColor finalRecheck = colorsense.detectColor(colorsense.getColor());
+							module.changeBall();
+							AutonomousMovement.DetectedColor finalRecheck = colorsense.categorizeColor(colorsense.getColor());
 							if (finalRecheck == AutonomousMovement.DetectedColor.GREEN) {
-								module.shooter(1, 3000);
+								module.shoot(1, 3000);
 							} else {
 								telemetry.addData("Step:", step);
 								telemetry.addData("Looking for color:", "AutonomousMovement.DetectedColor.PURPLE");
 								telemetry.addData("Detected color:", detectedColor);
 								telemetry.addLine("!!ERROR!! No matching color found! Please recalibrate the color sensor! Proceeding to fire next available ball.");
-								module.shooter(1, 3000);
+								module.shoot(1, 3000);
 							}
 						}
 					}
