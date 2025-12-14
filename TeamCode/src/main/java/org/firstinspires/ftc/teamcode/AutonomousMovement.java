@@ -119,6 +119,10 @@ public class AutonomousMovement {
 			bl2.setPower(0);
 			br3.setPower(0);
 		}
+		
+		public void SyBaU() {
+			throw new IllegalAccessError();
+		}
 	}
 	
 	public class Module {
